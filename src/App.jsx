@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import badge from './assets/badge.png'
 
 
 
@@ -52,9 +52,16 @@ export default function App() {
     <div className="App font-serif bg-gray-300 min-h-screen">
       <div className="flex justify-center items-center py-[10rem] sm-425:py-0 ">
         <div className="max-w-[30rem]  ">
-          <div className="flex flex-col bg-[#fff] w-full rounded-md px-5 py-5 sm-425:pt-16 sm-425:min-h-screen sm-375:min-h-screen sm-375:pt-16 sm-320:min-h-screen sm-320:pt-12">
+          <div className="flex flex-col bg-[#fff] w-full rounded-md px-5 py-12 sm-425:pt-16 sm-425:min-h-screen sm-375:min-h-screen sm-375:pt-16 sm-320:min-h-screen sm-320:pt-12">
             <div className="description mb-5">
-              <h1 className="text-black text-2xl font-semibold py-3 sm-320:text-center sm-425:text-center sm-375:text-center">MLSA Ghana Days 2023 </h1>
+              <div>
+                <img
+                  src={badge}
+                  alt="mlsa logo"
+                  className="w-20 h-20 mx-auto"
+                />
+              </div>
+              <h1 className="text-black text-2xl font-semibold text-center py-3 sm-320:text-center sm-425:text-center sm-375:text-center">MLSA Ghana Days 2023 </h1>
               <p className="font-medium text-sm text-justify ">MLSA Ghana Days is a 3-day event that brings together students, 
                 developers, and tech enthusiasts to learn, network, and share ideas on the latest
                  technologies from Microsoft.
