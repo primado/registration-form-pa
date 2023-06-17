@@ -1,34 +1,52 @@
 import { useEffect } from 'react'
 import { useForm } from "react-hook-form";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function App() {
 
-
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm();
 
   const watchAllFields = watch();
+
+  const navigate = useNavigate();
+
+  const onSubmit = async () => {
+
+      try {
+        const formdata = getValues()
+        const {full_name, email} = formdata;
+
+        const response = await axios.post("https://prod-20.westeurope.logic.azure.com:443/workflows/a39c4e3afaba426483e8bcfaabdb79de/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=fgzGkVQcZitDgIp4bX52naaTUhUDXaBVNFKiu3NXRxM",
+         {
+          "full_name": full_name,
+          "email": email
+         });
+
+         console.log('Response:', response)
+         reset();
+
+         // Redirect to Success message
+         navigate('/success')
+      } catch (error) {
+        console.log('Error:', error)
+      }
+  }
 
   useEffect(() => {
    const subscription =  watch((value, {name, type}) => console.log(value, name, type));
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  // write a useEffect to watch all fields and subcribe to it
-  // how do i use watchAllFields in the code below
-  // useEffect(() => {
-  //   const subscription = watchAllFields((value, {name, type}) => console.log(value, name, type));
-  //   return () => subscription.unsubscribe();
-  // }, [watchAllFields]);
-  // it returns an error that watchAllFields is not a function
-  // how do i use watchAllFields in the code below
 
 
 
 
-  const onSubmit = (data) => console.log(data);
+
+  // const onSubmit = (data) => console.log(data);
 
   return (
     <div className="App font-serif bg-gray-300 min-h-screen">
