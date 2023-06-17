@@ -7,7 +7,15 @@ export default {
   theme: {
     extend: {
 
-      
+      screens: {
+        
+
+        "sm-425": {"max":"430px"},
+        "sm-375": {"max":"380px"},
+        "sm-320": {"max": "325px"},
+
+
+      },
 
     },
   },
