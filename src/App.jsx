@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,6 +11,8 @@ export default function App() {
   const { register, handleSubmit, watch, getValues, reset, formState: { errors } } = useForm();
 
   const watchAllFields = watch();
+
+  const navigate = useNavigate();
 
   const onSubmit = async () => {
 
@@ -24,12 +27,13 @@ export default function App() {
          });
 
          console.log('Response:', response)
-
          reset();
+
+         // Redirect to Success message
+         navigate('/success')
       } catch (error) {
         console.log('Error:', error)
       }
-
   }
 
   useEffect(() => {
